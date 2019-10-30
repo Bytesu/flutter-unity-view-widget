@@ -1,5 +1,7 @@
 #import <Foundation/Foundation.h>
 
+#import <UnityFramework/UnityFramework.h>
+
 #ifndef UnityUtils_h
 #define UnityUtils_h
 
@@ -23,10 +25,16 @@ extern "C" {
 } // extern "C"
 #endif
 
-@interface UnityUtils : NSObject
+@protocol UnityEventListener <NSObject>
+- (void)onMessage:(NSString *)message;
+@end;
+
+@interface UnityUtils : NSObject<UnityBridgeHandler>
 
 + (BOOL)isUnityReady;
 + (void)createPlayer:(void (^)(void))completed;
++ (void)addUnityEventListener:(id<UnityEventListener>)listener;
++ (void)removeUnityEventListener:(id<UnityEventListener>)listener;
 
 @end
 

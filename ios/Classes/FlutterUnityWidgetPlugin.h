@@ -4,13 +4,14 @@
 //
 //  Created by Kris Pypen on 8/1/19.
 //
+#import "UnityUtils.h"
 
 #import <Flutter/Flutter.h>
 
 @interface FlutterUnityWidgetPlugin : NSObject<FlutterPlugin>
 @end
 
-@interface FUController : NSObject <FlutterPlatformView>
+@interface FUController : NSObject <FlutterPlatformView,UnityEventListener>
 
 - (instancetype)initWithFrame:(CGRect)frame
                viewIdentifier:(int64_t)viewId

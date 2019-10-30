@@ -75,6 +75,9 @@ public class FlutterUnityView implements PlatformView, MethodChannel.MethodCallH
                 UnityUtils.resume();
                 result.success(true);
                 break;
+            case "dispose":
+                result.success(true);
+                break;
             default:
                 result.notImplemented();
         }
@@ -89,8 +92,10 @@ public class FlutterUnityView implements PlatformView, MethodChannel.MethodCallH
     @Override
     public void dispose() {
         if (UnityUtils.isUnityReady()) {
-            UnityUtils.getPlayer().quit();
+            // UnityUtils.getPlayer().quit();
         }
+        UnityUtils.removeUnityEventListener(this);
+
     }
 
     private UnityView getUnityView(PluginRegistry.Registrar registrar) {

@@ -156,6 +156,21 @@ static BOOL _isUnityReady = NO;
 
         [UnityUtils listenAppState];
     });
+    [UnityFramework setMsgListener: self];
+
 }
+
++ (void)onMessage:(NSString *)message{
+    for(id<UnityEventListener> listener in mUnityEventListeners){
+        [listener onMessage:message];
+    }
+}
+
++ (void)addUnityEventListener:(id<UnityEventListener>) listener
+{
+    [mUnityEventListeners addObject:listener];
+}
+
+
 
 @end
